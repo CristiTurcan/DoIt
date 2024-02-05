@@ -1,3 +1,4 @@
 import '../css/style.css';
+import tabManager from './functionality/tabManager';
 
-console.log('works');
+tabManager.switchTab();

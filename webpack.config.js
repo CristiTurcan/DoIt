@@ -18,6 +18,7 @@ module.exports = {
   plugins: [
     new HtmlWebPackPlugin({
         title: 'DoIt - To Do List App',
+        template: './src/template/template.html',
     })
   ],
 };
