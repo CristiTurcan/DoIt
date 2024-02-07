@@ -5,14 +5,31 @@ import task from '../functionality/task';
 
 const homeContent = (function () {
 
+    const createDeleteButton = (newTask) => {
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = 'Delete';
+
+        deleteBtn.addEventListener('click', () => {
+            let id = deleteBtn.parentNode.getAttribute('data-id');
+            taskManager.deleteTask(id);
+        });
+
+        return deleteBtn;
+    }
+
     const createTaskCard = (tasks, taskContainer) => {
-        tasks.forEach((task) => {
+        tasks.forEach((oneTask, index) => {
             const newTask = document.createElement('div');
             newTask.classList.add('taskCard');
-            newTask.innerHTML = `Name: ${task.name}<br>DueDate: ${task.dueDate}<br>Priority: ${task.priority}`;
+            newTask.setAttribute('data-id', index);
+
+            const taskObj = task(oneTask.name, oneTask.dueDate, oneTask.priority);
+            newTask.innerHTML = taskObj.toString();
+
+            newTask.appendChild(createDeleteButton(newTask));
             taskContainer.appendChild(newTask);
         });
-    }
+    };
 
     const loadTaskContent = (content) => {
         const taskContainer = document.createElement('div');
@@ -20,9 +37,9 @@ const homeContent = (function () {
 
         let tasks = storageManager.getDataFromStorage("tasks");
         createTaskCard(tasks, taskContainer);
-        
+
         content.appendChild(taskContainer);
-    }
+    };
 
     const loadHomeContent = (content) => {
         const addNewTask = document.createElement('button');

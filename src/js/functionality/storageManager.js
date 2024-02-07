@@ -34,17 +34,23 @@ const storageManager = (function () {
         return 0;
     }
 
+    const dataExists = (itemName) => {
+        let data = localStorage.getItem(itemName);
+        if (data) return 1;
+        return 0;
+    }
+
     const getExistingDataFromStorage = (itemName) => {
         let data = localStorage.getItem(itemName);
         if (data) return data;
         return;
     }
 
-    const insertCurrentTaskIntoData = (itemArray, data) => {
+    const insertCurrentTaskIntoData = (item, data) => {
         //string array -> array of object/s
         data = JSON.parse(data);
         //add another array (array of object)
-        itemArray.pushToArray(data);
+        item.pushToArray(data);
         return data;
     }
 
@@ -76,13 +82,29 @@ const storageManager = (function () {
 
     const getDataFromStorage = (itemName) => {
         let data = getExistingDataFromStorage(itemName);
-        if(data) {
+        if (data) {
             data = JSON.parse(data);
             return data;
         }
     }
 
-    return { populateStorage, getDataFromStorage };
+    const deleteItem = (itemName, index) => {
+        let data = getExistingDataFromStorage(itemName);
+        if (data) {
+            data = JSON.parse(data);
+
+            if (data.length === 1){
+                console.log('este singurul element');
+                localStorage.clear();
+            }
+            else {
+                data.splice(index, 1);
+                insertDataIntoStorage(itemName, data);
+            }
+        }
+    }
+
+    return { dataExists, populateStorage, getDataFromStorage, deleteItem };
 })();
 
 export default storageManager;

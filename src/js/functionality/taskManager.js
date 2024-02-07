@@ -1,11 +1,18 @@
 import formContent from "../pages/formContent";
+import storageManager from "./storageManager";
+import contentManager from "./contentManager";
 
 const taskManager = (function () {
     const addTask = () => {
         formContent.loadFormContent();
     };
 
-    return { addTask };
+    const deleteTask = (index) => {
+        storageManager.deleteItem("tasks", index);
+        contentManager.loadHomeContent();
+    };
+
+    return { addTask, deleteTask };
 })();
 
 export default taskManager;
