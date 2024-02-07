@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 
 module.exports = {
   entry: './src/js/index.js',
@@ -17,8 +18,9 @@ module.exports = {
   },
   plugins: [
     new HtmlWebPackPlugin({
-        title: 'DoIt - To Do List App',
-        template: './src/template/template.html',
-    })
+      title: 'DoIt - To Do List App',
+      template: './src/template/template.html',
+    }),
+    new NodePolyfillPlugin()
   ],
 };

@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Do It - To Do List App</title>
 </head>
+
 <body>
     <header>Do It</header>
     <div class="container">
@@ -13,6 +15,29 @@
             <button id="projects">Projects</button>
         </div>
         <div class="content"></div>
+        <div class="formContainerPopUp">
+            <div class="blocker"></div>
+            <div class="formContainer">
+                <form>
+                    <section class="formInformation">
+                        <label for="name">Title</label>
+                        <input type="text" name="name" id="name" required>
+                        <label for="dueDate">Date</label>
+                        <input type="date" name="dueDate" id="dueDate" required>
+                        <label for="priority">Priority</label>
+                        <select name="priority" id="priority">
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </section>
+                    <section class="formBtn">
+                        <button class="submitBtn" type="submit">Add Task</button>
+                    </section>
+                </form>
+            </div>
+        </div>
     </div>
 </body>
+
 </html>

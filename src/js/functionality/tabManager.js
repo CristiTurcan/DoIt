@@ -1,20 +1,19 @@
 import contentManager from "./contentManager";
-import removeAllChildren from "./removeAllChildren";
 
 const tabManager = (function () {
-    const content = document.querySelector('.content');
     const homeBtn = document.querySelector('#home');
     const projectBtn = document.querySelector('#projects');
 
+    //always main tab is home
+    contentManager.loadHomeContent();
+
     const switchTab = () => {
         homeBtn.addEventListener('click', () => {
-            removeAllChildren(content);
-            contentManager.loadHomeContent(content);
+            contentManager.loadHomeContent();
         });
 
         projectBtn.addEventListener('click', () => {
-            removeAllChildren(content);
-            contentManager.loadProjectContent(content);
+            contentManager.loadProjectContent();
         });
     }
 
