@@ -13,6 +13,7 @@ const formContent = (function () {
     }
 
     blocker.addEventListener('click', () => {
+        formDataManager.resetForm();
         hideFormPopUp();
     });
 

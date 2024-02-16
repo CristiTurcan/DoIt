@@ -25,7 +25,7 @@ const formDataManager = (function () {
         resetForm();
     };
 
-    return { isEmpty, sendData }
+    return { resetForm, isEmpty, sendData }
 })();
 
 export default formDataManager;

@@ -5,12 +5,12 @@ import task from '../functionality/task';
 
 const homeContent = (function () {
 
-    const createDeleteButton = (newTask) => {
+    const createDeleteButton = () => {
         const deleteBtn = document.createElement('button');
         deleteBtn.textContent = 'Delete';
 
         deleteBtn.addEventListener('click', () => {
-            let id = deleteBtn.parentNode.getAttribute('data-id');
+            const id = deleteBtn.parentNode.getAttribute('data-id');
             taskManager.deleteTask(id);
         });
 
@@ -26,7 +26,7 @@ const homeContent = (function () {
             const taskObj = task(oneTask.name, oneTask.dueDate, oneTask.priority);
             newTask.innerHTML = taskObj.toString();
 
-            newTask.appendChild(createDeleteButton(newTask));
+            newTask.appendChild(createDeleteButton());
             taskContainer.appendChild(newTask);
         });
     };

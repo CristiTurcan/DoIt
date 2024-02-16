@@ -4,7 +4,6 @@ function task(name, dueDate, priority) {
     const getDueDate = () => { return dueDate };
     const getPriority = () => { return priority };
 
-
     const pushToArray = (arr) => {
         arr.push({ name, dueDate, priority });
     }

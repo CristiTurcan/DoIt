@@ -1,4 +1,4 @@
-const storageManager = (function () {
+const storageAvailability = (function () {
     const storageAvailable = (type) => {
         let storage;
         try {
@@ -34,77 +34,79 @@ const storageManager = (function () {
         return 0;
     }
 
+    return { storageNotAvailable };
+})();
+
+const storageData = (function () {
+    const deleteItemFromData = (data, index) => {
+        data.splice(index, 1);
+    }
+
+    const insertCurrentTaskIntoData = (item, data) => {
+        item.pushToArray(data);
+        return data;
+    }
+
+    const initializeData = (item) => {
+        let data = new Array();
+        item.pushToArray(data);
+        return data;
+    }
+
+    return { deleteItemFromData, insertCurrentTaskIntoData, initializeData };
+})()
+
+const storageManager = (function (storageAvailability, storageData) {
+
+    const insertDataIntoStorage = (itemName, data) => {
+        data = JSON.stringify(data);
+        localStorage.setItem(itemName, data);
+    }
+
     const dataExists = (itemName) => {
         let data = localStorage.getItem(itemName);
         if (data) return 1;
         return 0;
     }
 
-    const getExistingDataFromStorage = (itemName) => {
-        let data = localStorage.getItem(itemName);
-        if (data) return data;
-        return;
-    }
-
-    const insertCurrentTaskIntoData = (item, data) => {
-        //string array -> array of object/s
-        data = JSON.parse(data);
-        //add another array (array of object)
-        item.pushToArray(data);
-        return data;
-    }
-
-    const insertDataIntoStorage = (itemName, data) => {
-        localStorage.setItem(itemName, JSON.stringify(data));
-    }
-
-    const initializeArray = (item) => {
-        const itemArray = new Array();
-        item.pushToArray(itemArray);
-        return itemArray
-    }
-
-
     const populateStorage = (itemName, item) => {
-        if (storageNotAvailable()) return;
+        if (storageAvailability.storageNotAvailable()) return;
 
-        let data = getExistingDataFromStorage(itemName);
+        let data = getDataFromStorage(itemName);
 
         //check if there is existing data
         if (data) {
-            data = insertCurrentTaskIntoData(item, data);
+            data = storageData.insertCurrentTaskIntoData(item, data);
             insertDataIntoStorage(itemName, data);
         } else {
-            const itemArray = initializeArray(item);
-            insertDataIntoStorage(itemName, itemArray);
+            data = storageData.initializeData(item);
+            insertDataIntoStorage(itemName, data);
         }
     }
 
     const getDataFromStorage = (itemName) => {
-        let data = getExistingDataFromStorage(itemName);
+        let data = localStorage.getItem(itemName);
         if (data) {
             data = JSON.parse(data);
             return data;
         }
+        return;
     }
 
     const deleteItem = (itemName, index) => {
-        let data = getExistingDataFromStorage(itemName);
+        let data = getDataFromStorage(itemName);
         if (data) {
-            data = JSON.parse(data);
-
-            if (data.length === 1){
-                console.log('este singurul element');
+            if (data.length === 1) {
                 localStorage.clear();
             }
             else {
-                data.splice(index, 1);
+                storageData.deleteItemFromData(data, index);
                 insertDataIntoStorage(itemName, data);
             }
         }
     }
 
     return { dataExists, populateStorage, getDataFromStorage, deleteItem };
-})();
+})(storageAvailability, storageData);
 
 export default storageManager;
