@@ -16,6 +16,20 @@ const taskContent = (function () {
         return deleteBtn;
     }
 
+    const editFormInput = (name, dueDate, priority, index) => {
+        name.addEventListener('change', () => {
+            taskManager.editTask(index, "name", name.value);
+        })
+
+        dueDate.addEventListener('change', () => {
+            taskManager.editTask(index, "dueDate", dueDate.value);
+        })
+
+        priority.addEventListener('change', () => {
+            taskManager.editTask(index, "priority", priority.value);
+        })
+    }
+
     const createTaskForm = () => {
         const taskForm = document.querySelector('.formContainer');
         const taskFormClone = taskForm.cloneNode(true);
@@ -42,17 +56,7 @@ const taskContent = (function () {
             dueDate.value = taskObj.getDueDate();
             priority.value = taskObj.getPriority();
 
-            name.addEventListener('change', () => {
-                console.log(name.value);
-            })
-
-            dueDate.addEventListener('change', () => {
-                console.log(dueDate.value);
-            })
-
-            priority.addEventListener('change', () => {
-                console.log(priority.value);
-            })
+            editFormInput(name, dueDate, priority, index);
 
             newTask.appendChild(taskForm);
             newTask.appendChild(createDeleteButton());

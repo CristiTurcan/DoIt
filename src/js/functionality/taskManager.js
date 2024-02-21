@@ -13,7 +13,12 @@ const taskManager = (function () {
         contentManager.loadHomeContent();
     };
 
-    return { addTask, deleteTask };
+    const editTask = (index, oldValueType, newValue) => {
+        storageManager.editItem("tasks", index, oldValueType, newValue);
+        contentManager.loadHomeContent();
+    };
+
+    return { addTask, deleteTask, editTask };
 })();
 
 export default taskManager;

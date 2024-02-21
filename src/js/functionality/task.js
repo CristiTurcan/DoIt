@@ -8,11 +8,7 @@ function task(name, dueDate, priority) {
         arr.push({ name, dueDate, priority });
     }
 
-    const toString = () => {
-        return `Name: ${name}\n DueDate: ${dueDate}\n Priority:${priority}`;
-    }
-
-    return { getName, getDueDate, getPriority, pushToArray, toString };
+    return { getName, getDueDate, getPriority, pushToArray };
 }
 
 export default task;

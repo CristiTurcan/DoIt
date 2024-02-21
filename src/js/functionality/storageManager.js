@@ -61,13 +61,13 @@ const storageManager = (function (storageAvailability, storageData) {
     const insertDataIntoStorage = (itemName, data) => {
         data = JSON.stringify(data);
         localStorage.setItem(itemName, data);
-    }
+    };
 
     const dataExists = (itemName) => {
         let data = localStorage.getItem(itemName);
         if (data) return 1;
         return 0;
-    }
+    };
 
     const populateStorage = (itemName, item) => {
         if (storageAvailability.storageNotAvailable()) return;
@@ -82,7 +82,7 @@ const storageManager = (function (storageAvailability, storageData) {
             data = storageData.initializeData(item);
             insertDataIntoStorage(itemName, data);
         }
-    }
+    };
 
     const getDataFromStorage = (itemName) => {
         let data = localStorage.getItem(itemName);
@@ -91,7 +91,7 @@ const storageManager = (function (storageAvailability, storageData) {
             return data;
         }
         return;
-    }
+    };
 
     const deleteItem = (itemName, index) => {
         let data = getDataFromStorage(itemName);
@@ -104,9 +104,17 @@ const storageManager = (function (storageAvailability, storageData) {
                 insertDataIntoStorage(itemName, data);
             }
         }
-    }
+    };
 
-    return { dataExists, populateStorage, getDataFromStorage, deleteItem };
+    const editItem = (itemName, index, oldValueType, newValue) => {
+        let data = getDataFromStorage(itemName);
+        if(data) {
+            data[index][oldValueType] = newValue;
+            insertDataIntoStorage("tasks", data);
+        }
+    };
+
+    return { dataExists, populateStorage, getDataFromStorage, deleteItem, editItem };
 })(storageAvailability, storageData);
 
 export default storageManager;
