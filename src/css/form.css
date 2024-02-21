@@ -25,3 +25,14 @@
     padding: 20px;
     border-radius: 1.2em;
 }
+
+.formInformation {
+    border: 1px solid red;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+}
+
+.formInformation :first-child {
+    grid-column: 1 / -1;
+}

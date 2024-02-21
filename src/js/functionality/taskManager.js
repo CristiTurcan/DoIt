@@ -3,6 +3,7 @@ import storageManager from "./storageManager";
 import contentManager from "./contentManager";
 
 const taskManager = (function () {
+    
     const addTask = () => {
         formContent.loadFormContent();
     };
