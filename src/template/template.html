@@ -21,12 +21,17 @@
                 <form>
                     <section class="formInformation">
                         <input type="text" name="name" id="name" required>
-                        <input type="date" name="dueDate" id="dueDate" required>
+                        <div class="dateContainer">
+                            <span id="dateDisplay">Choose date </span>
+                            <input type="date" name="dueDate" id="dueDate">
+                        </div>
                         <select name="priority" id="priority">
+                            <option value="." selected disabled hidden>Priority</option>
+                            <option value="none">None</option>
                             <option value="low">Low</option>
                             <option value="medium">Medium</option>
                             <option value="high">High</option>
-                        </select>
+                        </select> 
                     </section>
                     <section class="formBtn">
                         <button class="submitBtn" type="submit">Add Task</button>

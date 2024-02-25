@@ -6,7 +6,7 @@ const taskContent = (function () {
 
     const createDeleteButton = () => {
         const deleteBtn = document.createElement('button');
-        deleteBtn.textContent = 'Delete';
+        deleteBtn.textContent = 'Done';
 
         deleteBtn.addEventListener('click', () => {
             const id = deleteBtn.parentNode.getAttribute('data-id');
@@ -33,6 +33,8 @@ const taskContent = (function () {
     const createTaskForm = () => {
         const taskForm = document.querySelector('.formContainer');
         const taskFormClone = taskForm.cloneNode(true);
+        const formBtnClone = taskFormClone.querySelector('.formBtn');
+        formBtnClone.remove();
         taskFormClone.classList.remove('formContainer');
         //here i can add a special class for taskCard Form
 
@@ -47,15 +49,18 @@ const taskContent = (function () {
             const name = taskForm.querySelector('#name');
             const dueDate = taskForm.querySelector('#dueDate');
             const priority = taskForm.querySelector('#priority');
+            const dateDisplay = taskForm.querySelector('#dateDisplay');
             newTask.classList.add('taskCard');
             newTask.setAttribute('data-id', index);
 
-            //breaks encapsulation - only for frontend - data in localStorage remains the same
+            //breaks encapsulation? - only for frontend - data in localStorage remains the same
             const taskObj = task(oneTask.name, oneTask.dueDate, oneTask.priority);
             name.value = taskObj.getName();
             dueDate.value = taskObj.getDueDate();
             priority.value = taskObj.getPriority();
+            dateDisplay.textContent = taskObj.getDisplayDate();
 
+            //add edit functionality to task card
             editFormInput(name, dueDate, priority, index);
 
             newTask.appendChild(taskForm);

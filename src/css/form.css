@@ -27,7 +27,6 @@
 }
 
 .formInformation {
-    border: 1px solid red;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 5px;
@@ -35,4 +34,25 @@
 
 .formInformation :first-child {
     grid-column: 1 / -1;
+}
+
+.dateContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#dateDisplay {
+    min-width: 120px;
+}
+
+/* hide date input text (show only calendar icon) */
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+    /* display: none;
+    -webkit-appearance: none; */
+    margin:0;
+}
+input[type="date"]::-webkit-datetime-edit {
+    display:none;
 }
