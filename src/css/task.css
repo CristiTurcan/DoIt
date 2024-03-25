@@ -1,0 +1,14 @@
+.taskContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.taskCard {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+}
+
+.taskCard :first-child {
+    grid-column: 1 / -1;
+}

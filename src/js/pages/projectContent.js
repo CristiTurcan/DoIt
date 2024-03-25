@@ -1,9 +1,15 @@
+import projectManager from "../functionality/projectManager";
+
 const projectContent = (function () {
     const loadProjectContent = (content) => {
-        const title = document.createElement('span');
-        title.textContent = 'This is Projects';
+        const addNewProject = document.createElement('button');
+        addNewProject.textContent = 'New Project';
 
-        content.appendChild(title);
+        addNewProject.addEventListener('click', () => {
+            projectManager.addProject();
+        })
+
+        content.appendChild(addNewProject);
     };
 
     return { loadProjectContent };

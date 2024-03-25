@@ -1,0 +1,23 @@
+.taskListContainer {
+    overflow-y: auto;
+    max-height: 200px;
+    display: flex;
+    flex-direction: column;
+}
+
+.isSelected {
+    background-color: green;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.taskList::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.taskList {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}

@@ -5,7 +5,7 @@ import contentManager from "./contentManager";
 const taskManager = (function () {
     
     const addTask = () => {
-        formContent.loadFormContent();
+        formContent.loadFormContent(0);
     };
 
     const deleteTask = (index) => {
@@ -14,7 +14,8 @@ const taskManager = (function () {
     };
 
     const editTask = (index, oldValueType, newValue) => {
-        storageManager.editItem("tasks", index, oldValueType, newValue);
+        if(newValue !== '' && newValue !== undefined)
+            storageManager.editItem("tasks", index, oldValueType, newValue);
         contentManager.loadHomeContent();
     };
 

@@ -1,22 +1,26 @@
+import "../../css/task.css";
 import dateManager from "./dateManager";
 
-function task(name, dueDate, priority) {
+function task(taskID, name, dueDate, priority) {
 
-    //if no priority selected => none
-    if (priority === '.') priority = 'none';
+    if (priority === '.') priority = 'none';    // if no priority selected => none
+    if (dueDate === '') dueDate = 'none';   // if no dueDate selected => none
 
+    const setID = (id) => {taskID = id};
+    const getID = () => { return taskID };
     const getName = () => { return name };
     const getDueDate = () => { return dueDate };
     const getPriority = () => { return priority };
-    const getDisplayDate = () => {
-        return dateManager.displayDate(dueDate);
-    }
+    const getDisplayDate = () => { return dateManager.displayDate(dueDate); }
 
     const pushToArray = (arr) => {
-        arr.push({ name, dueDate, priority });
+        arr.push({ taskID, name, dueDate, priority });
     }
 
-    return { getName, getDueDate, getPriority, getDisplayDate, pushToArray };
+    return {
+        setID, getID, getName, getDueDate,
+        getPriority, getDisplayDate, pushToArray
+    };
 }
 
 export default task;

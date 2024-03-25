@@ -1,6 +1,6 @@
-import task from "./task";
 import storageManager from "./storageManager";
 import dateManager from "./dateManager";
+import toDoCreator from "./toDoCreator";
 
 const formDataManager = (function () {
     const name = document.querySelector('#name');
@@ -12,6 +12,14 @@ const formDataManager = (function () {
         dateDisplay.textContent = dateManager.displayDate(dueDate.value);
     });
 
+    const getTaskID = () => {
+        // new task ID is length of data from storage
+        let id = storageManager.getDataFromStorage('tasks', 1);
+        if (id === undefined)
+            return 0;
+        return id.length;
+    }
+
     const resetForm = () => {
         name.value = '';
         dueDate.value = '';
@@ -21,14 +29,15 @@ const formDataManager = (function () {
 
     const isEmpty = () => {
         if (name.value === '' || name.value === undefined) {
-            console.log('formDataManager: name.value is empty');
+            console.log("NAME ESTE EMPTY!!!");
             return 1;
         }
         return 0;
     };
 
     const sendData = () => {
-        let oneTask = task(name.value, dueDate.value, priority.value);
+        const id = getTaskID();
+        let oneTask = toDoCreator.createToDo('tasks', { taskID: id, name: name.value, dueDate: dueDate.value, priority: priority.value });
         storageManager.populateStorage('tasks', oneTask);
         resetForm();
     };

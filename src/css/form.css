@@ -10,7 +10,8 @@
     filter: blur(1px);
 }
 
-.formContainer {
+.formContainer, 
+.projectFormContainer {
     display: none;
     position: absolute;
     margin: auto;

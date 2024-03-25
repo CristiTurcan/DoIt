@@ -1,4 +1,3 @@
-import '../../css/home.css';
 import taskManager from "../functionality/taskManager";
 
 const homeContent = (function () {

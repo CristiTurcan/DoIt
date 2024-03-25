@@ -13,7 +13,7 @@ const dateManager = (function () {
     }
 
     const emptyDate = (dueDate) => {
-        if (dueDate === '' || dueDate === undefined)
+        if (dueDate === 'none')
             return 1;
         return 0;
     }
